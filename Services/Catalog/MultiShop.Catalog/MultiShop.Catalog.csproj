@@ -7,6 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Services\ProductService\**" />
+    <Content Remove="Services\ProductService\**" />
+    <EmbeddedResource Remove="Services\ProductService\**" />
+    <None Remove="Services\ProductService\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AutoMapper" Version="12.0.1" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
     <PackageReference Include="MongoDB.Bson" Version="3.4.0" />
@@ -16,8 +23,6 @@
 
   <ItemGroup>
     <Folder Include="Controllers\" />
-    <Folder Include="Services\ProductImageServices\" />
-    <Folder Include="Services\ProductService\" />
   </ItemGroup>
 
 </Project>

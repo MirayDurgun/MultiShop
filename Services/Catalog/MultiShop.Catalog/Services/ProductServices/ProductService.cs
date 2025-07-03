@@ -27,7 +27,7 @@ namespace MultiShop.Catalog.Services.ProductDetailServices
 
         public async Task DeleteProductAsync(string id)
         {
-            await _productCollection.DeleteOneAsync(x => x.ProductIDd == id);
+            await _productCollection.DeleteOneAsync(x => x.ProductId == id);
         }
 
         public async Task<List<ResultProductDto>> GetAllProductAsync()
@@ -38,14 +38,14 @@ namespace MultiShop.Catalog.Services.ProductDetailServices
 
         public async Task<GetByIdProductDto> GetByIdProductAsync(string id)
         {
-            var values = await _productCollection.Find<Product>(x => x.ProductIDd == id).FirstOrDefaultAsync();
+            var values = await _productCollection.Find<Product>(x => x.ProductId == id).FirstOrDefaultAsync();
             return _mapper.Map<GetByIdProductDto>(values);
         }
 
         public async Task UpdateProductAsync(UpdateProductDto updateProductDto)
         {
             var values = _mapper.Map<Product>(updateProductDto);
-            await _productCollection.FindOneAndReplaceAsync(x => x.ProductIDd == updateProductDto.ProductIDd, values);
+            await _productCollection.FindOneAndReplaceAsync(x => x.ProductId == updateProductDto.ProductId, values);
         }
     }
 }

@@ -2,7 +2,7 @@
 {
     public class ResultProductDetailDto
     {
-        public string ProductDetailIDd { get; set; }
+        public string ProductDetailId { get; set; }
         public string ProductDetailDescription { get; set; }
         public string ProductDetailInfo { get; set; }
         public string ProdutcId { get; set; }
