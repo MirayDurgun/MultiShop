@@ -8,7 +8,12 @@
         public string ProductCollectionName { get; set; }
         public string ProductDetailCollectionName { get; set; }
         public string ProductImageCollectionName { get; set; }
+
+        // MongoDB bağlantı cümlesi (sunucu adresi, port, kullanıcı vs. bilgileri içerir)
         public string ConnectionStrings { get; set; }
+
+
+        // Bağlanılacak MongoDB veritabanının adı
         public string DatabaseName { get; set; }
     }
 }
