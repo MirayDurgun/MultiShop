@@ -36,28 +36,36 @@ namespace MultiShop.Catalog.Services.CategoryServices
         public async Task CreateCategoryAsync(CreateCategoryDto createCategoryDto)
         {
             var value = _mapper.Map<Category>(createCategoryDto);
-           // await
-            
+            await _categoryCollection.InsertOneAsync(value);
+            //MongoDB .NET Driver'da kullanılan bir metottur. 
+            //MongoDB'de bir belge (document) eklemek için kullanılır ve bu işlem asenkron (async) şekilde yapılır
+
         }
 
-        public Task DeleteCategoryAsync(string id)
+        public async Task DeleteCategoryAsync(string id)
         {
-            throw new NotImplementedException();
+            await _categoryCollection.DeleteOneAsync(x => x.CategoryId == id);
+            //CategoryId'si id'ye eşit olan belgeyi bul ve sil.
         }
 
-        public Task<List<ResultCategoryDto>> GetAllCategoryAsync()
+        public async Task<List<ResultCategoryDto>> GetAllCategoryAsync()
         {
-            throw new NotImplementedException();
+            var values = await _categoryCollection.Find(x => true).ToListAsync();
+            // x => true ifadesi: Tüm kayıtları seç 
+            return _mapper.Map<List<ResultCategoryDto>>(values);
+            // Gelen kategori listesini DTO tipine dönüştür
         }
 
-        public Task<GetByIdCategoryDto> GetByIdCategoryAsync(string id)
+        public async Task<GetByIdCategoryDto> GetByIdCategoryAsync(string id)
         {
-            throw new NotImplementedException();
+            var values = await _categoryCollection.Find<Category>(x => x.CategoryId == id).FirstOrDefaultAsync();
+            return _mapper.Map<GetByIdCategoryDto>(values);
         }
 
-        public Task UpdateCategoryAsync(UpdateCategoryDto updateCategoryDto)
+        public async Task UpdateCategoryAsync(UpdateCategoryDto updateCategoryDto)
         {
-            throw new NotImplementedException();
+            var values = _mapper.Map<Category>(updateCategoryDto);
+            await _categoryCollection.FindOneAndReplaceAsync(x => x.CategoryId == updateCategoryDto.CategoryId, values);
         }
     }
 }
